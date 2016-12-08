@@ -84,9 +84,8 @@ def getContent(src):
     # 1st approach to find text content: get largest sequence of p tag, using
     # BeautifulSoup
         # cleaning body from script and style tags        
-        if len(raw.select('script style')) > 0:
-           for script in raw.body(["script", "style"]):
-                script.extract()
+        for script in raw(["script", "style"]):
+            script.extract()
         # largest sequence of p tags    
         return max(raw.find_all(), key=lambda t: len(t.find_all('p', recursive=False))).get_text()
 #==============================================================================
